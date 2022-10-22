@@ -1,0 +1,55 @@
+.form {
+  max-width: 370px;
+  margin: 10rem auto 2rem;
+  padding: 1.5rem;
+  background: #fff;
+  box-shadow: 0 0 8px 2px #ddd;
+  border-radius: 0.25rem;
+  font-weight: bold;
+
+  h2 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: #444;
+  }
+
+  button {
+    padding: 0.5rem 0.5rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    background: rgb(255, 110, 43);
+    color: #fff;
+    font-size: 1rem;
+    width: 120px;
+    border-radius: 0.25rem;
+    border: none;   
+    cursor: pointer;
+    &:hover {
+      background: rgb(255, 89, 12);
+    }
+  }
+
+  button.loading {
+    background: rgb(255, 144, 92);
+    cursor: initial;
+  }
+}
+
+.error {
+  color: red;
+  font-weight: normal;
+}
+
+.footer {
+  margin-top: 2rem;
+  font-weight: normal;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.footerLink {
+  display: inline-block;
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}     
