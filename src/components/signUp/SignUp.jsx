@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
 function Login() {
   const [user, setUser] = React.useState("");
   const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState(null);
-  const [passCheck, setPassCheck] = React.useState(null);
+  const [password, setPassword] = React.useState("");
+  const [passCheck, setPassCheck] = React.useState("");
 
   const { request, loading, error } = useFetch();
 
