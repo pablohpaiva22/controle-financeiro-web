@@ -54,7 +54,7 @@ function SignUp() {
 
       <p className={styles.footer}>
         Já é cadastrado? Faça{" "}
-        <Link className={styles.footerLink} to={"/"}>
+        <Link className={styles.footerLink} to={"/login"}>
           Login
         </Link>{" "}
       </p>
