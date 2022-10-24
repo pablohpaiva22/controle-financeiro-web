@@ -1,0 +1,36 @@
+.header {
+  background: black;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5em 1rem;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+}
+
+.logo {
+  display: block;
+  color: #fff;
+  padding: 0.5rem;
+  text-decoration: none;
+}
+
+.link {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 0.5rem;
+  &:hover {
+    color: var(--color-primary);
+  }
+  &:focus {
+      color: var(--color-primary);
+  }
+}
+
+.activeStyle {
+  color: var(--color-primary);
+}
