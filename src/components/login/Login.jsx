@@ -1,12 +1,14 @@
 import React from "react";
 import styles from "./Login.module.scss";
 import useFetch from "../../hooks/useFetch";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Input from "../general/Input";
 
 function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [success, setSuccess] = React.useState(false);
+  const navigate = useNavigate()
 
   const { data, loading, error, request } = useFetch();
 
@@ -27,6 +29,12 @@ function Login() {
   React.useEffect(() => {
     if (data && data.token) {
       localStorage.setItem("token", data.token);
+
+      setSuccess(true)
+      
+      setTimeout(() => {
+        navigate('/minhaconta')
+      }, 1500)
     }
   }, [data]);
 
@@ -46,6 +54,8 @@ function Login() {
       )}
 
       {error && <p className={styles.error}>{error}</p>}
+
+      {success && <p className={styles.success}>Usuário logado com sucesso. Redirecionando...</p>}
 
       <p className={styles.footer}>
         Ainda não é cadastrado?{" "}
