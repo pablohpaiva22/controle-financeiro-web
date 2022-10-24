@@ -5,7 +5,7 @@ const useFetch = () => {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
 
-  const request = React.useCallback(async (url, options) => {
+  const request = (async (url, options) => {
     try {
       setError(null);
       setLoading(true);
@@ -18,7 +18,7 @@ const useFetch = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  });
 
   return {
     data,
