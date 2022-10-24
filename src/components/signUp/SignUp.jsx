@@ -28,7 +28,9 @@ function SignUp() {
       }),
     };
 
-    request("https://new-project-server.herokuapp.com/newuser", options);
+    const url = "https://new-project-server.herokuapp.com/newuser"
+
+    request(url, options);
   }
 
   return (
