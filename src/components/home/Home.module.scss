@@ -1,0 +1,18 @@
+.container {
+  margin: 11.5rem auto 2rem;
+  text-align: center;
+
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.links {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+
+  a {
+    color: rgba(0, 0, 255, 0.952);
+  }
+}
