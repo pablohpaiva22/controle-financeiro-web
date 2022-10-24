@@ -4,7 +4,7 @@ import useFetch from "../../hooks/useFetch"
 import Input from "../general/Input";
 import { Link } from "react-router-dom";
 
-function Login() {
+function SignUp() {
   const [user, setUser] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -60,4 +60,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default SignUp;
