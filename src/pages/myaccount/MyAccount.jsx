@@ -6,18 +6,18 @@ import { GlobalContext } from "../../context/GlobalContext";
 
 function MyAccount() {
   const { request, data, error, loading } = useFetch();
-  const { setLogin } = React.useContext(GlobalContext)
+  const { setLogin } = React.useContext(GlobalContext);
   const navigate = useNavigate();
 
   React.useEffect(() => {
     if (data) {
-      localStorage.setItem("user", JSON.stringify(data))
+      localStorage.setItem("user", JSON.stringify(data));
     }
 
     if (error) {
-      navigate('/login')
-      localStorage.clear()
-      setLogin(false)
+      navigate("/login");
+      localStorage.clear();
+      setLogin(false);
     }
   }, [data, error]);
 
@@ -25,18 +25,14 @@ function MyAccount() {
     const token = localStorage.getItem("token");
 
     if (token) {
-      async function getUser() {
-        const url = "https://new-project-server.herokuapp.com/getuser";
+      const url = "https://new-project-server.herokuapp.com/getuser";
 
-        const options = {
-          method: "GET",
-          headers: { authorization: "Bearer " + token },
-        };
+      const options = {
+        method: "GET",
+        headers: { authorization: "Bearer " + token },
+      };
 
-        request(url, options);
-      }
-
-      getUser();
+      request(url, options);
     } else {
       navigate("/login");
     }
