@@ -8,7 +8,6 @@ import { GlobalContext } from "../../context/GlobalContext";
 function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [success, setSuccess] = React.useState(false);
   const navigate = useNavigate();
   const { setLogin } = React.useContext(GlobalContext);
   const { data, loading, error, request } = useFetch();
@@ -37,13 +36,10 @@ function Login() {
     if (data && data.token) {
       localStorage.setItem("token", data.token);
 
-      setSuccess(true);
       setLogin(true);
-
-      setTimeout(() => {
-        navigate("/minhaconta");
-      }, 1500);
+      navigate('/minhaconta')
     }
+
   }, [data]);
 
   return (
@@ -74,12 +70,6 @@ function Login() {
       )}
 
       {error && <p className={styles.error}>{error}</p>}
-
-      {success && (
-        <p className={styles.success}>
-          Usuário logado com sucesso. Redirecionando...
-        </p>
-      )}
 
       <p className={styles.footer}>
         Ainda não é cadastrado?{" "}
