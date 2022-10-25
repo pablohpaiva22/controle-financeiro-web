@@ -10,9 +10,7 @@ function Login() {
   const [password, setPassword] = React.useState("");
   const [success, setSuccess] = React.useState(false);
   const navigate = useNavigate();
-
   const { setLogin } = React.useContext(GlobalContext);
-
   const { data, loading, error, request } = useFetch();
 
   async function handleSubmit(event) {
@@ -30,6 +28,12 @@ function Login() {
   }
 
   React.useEffect(() => {
+    const user = localStorage.getItem('user')
+
+    if (user) {
+      navigate('/minhaconta')
+    }
+
     if (data && data.token) {
       localStorage.setItem("token", data.token);
 
