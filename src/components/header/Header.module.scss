@@ -5,17 +5,25 @@
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 1.5em 1rem;
+  padding: 0 1rem;
   color: #fff;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .logo {
   display: block;
-  color: #fff;
   padding: 0.5rem;
+  width: 100px;
+  color: #fff;
   text-decoration: none;
+  a {
+    display: block;
+  }
+  img {
+    margin-top: 4px;
+  }
 }
 
 .link {

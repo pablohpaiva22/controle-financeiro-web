@@ -18,9 +18,9 @@ function Header() {
   return (
     <header className={styles.header}>
       <div className={styles.container}>
-        <div>
-          <Link className={styles.logo} to="/">
-            Logo
+        <div className={styles.logo}>
+          <Link to='/'>
+            <img src="../../src/assets/logo-white.png" alt="" />
           </Link>
         </div>
 
