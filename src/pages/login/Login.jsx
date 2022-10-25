@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Login.module.scss";
 import useFetch from "../../hooks/useFetch";
 import { Link, useNavigate } from "react-router-dom";
-import Input from "../general/Input";
+import Input from "../../components/general/Input";
 import { GlobalContext } from "../../context/GlobalContext";
 
 function Login() {

@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./SignUp.module.scss";
 import useFetch from "../../hooks/useFetch"
-import Input from "../general/Input";
+import Input from "../../components/general/Input";
 import { Link } from "react-router-dom";
 
 function SignUp() {
