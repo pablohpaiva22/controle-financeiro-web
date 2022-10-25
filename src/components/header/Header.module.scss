@@ -34,3 +34,26 @@
 .activeStyle {
   color: var(--color-primary);
 }
+
+.nav {
+  ul {
+    display: flex;
+    gap: 1rem;
+  }
+}
+
+.button {
+  display: block;
+  border: none;
+  padding: 0.5rem;
+  color: #fff;
+  background: #000;
+  font-size: 1rem;
+  cursor: pointer;
+  &:hover {
+    color: var(--color-primary);
+  }
+  &:focus {
+    color: var(--color-primary);
+}
+}
