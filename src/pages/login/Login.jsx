@@ -12,20 +12,6 @@ function Login() {
   const { setLogin } = React.useContext(GlobalContext);
   const { data, loading, error, request } = useFetch();
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    };
-
-    request("https://new-project-server.herokuapp.com/login", options);
-  }
-
   React.useEffect(() => {
     const user = localStorage.getItem('user')
 
@@ -41,6 +27,20 @@ function Login() {
     }
 
   }, [data]);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+    };
+
+    request("https://new-project-server.herokuapp.com/login", options);
+  }
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
