@@ -9,7 +9,7 @@ import { UserStorage } from "./context/GlobalContext";
 
 function App() {
   return (
-    <div>
+    <>
       <BrowserRouter>
         <UserStorage>
           <Header />
@@ -22,7 +22,7 @@ function App() {
           </Routes>
         </UserStorage>
       </BrowserRouter>
-    </div>
+    </>
   );
 }
 
