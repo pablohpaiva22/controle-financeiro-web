@@ -1,5 +1,25 @@
 .container {
   max-width: 350px;
+  height: 350px;
   margin: 10rem auto;
   text-align: center;
+}
+
+.loading {
+  background: linear-gradient(to right, #eee, #fff);
+  height: 329.8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 3px 1px #eee;
+  animation: skeleton 1500ms infinite;
+}
+
+@keyframes skeleton {
+  from {
+    background: linear-gradient(to right, #eee, #fff);
+  }
+  to {
+    background: linear-gradient(to left, #eee, #fff);
+  }
 }

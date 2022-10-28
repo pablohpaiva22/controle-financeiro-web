@@ -40,8 +40,8 @@ function MyAccount() {
 
   return (
     <div className={styles.container}>
-      {data && <h1>My Account</h1>}
-      {loading && <p>carregando...</p>}
+      {data && <img src="src/assets/logo-black.png" alt="" />}
+      {loading && <div className={styles.loading}></div>}
     </div>
   );
 }
