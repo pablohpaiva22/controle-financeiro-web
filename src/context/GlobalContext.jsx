@@ -1,6 +1,6 @@
 import React from "react";
 
-export const GlobalContext = React.createContext();
+export const GlobalContext = React.createContext("");
 
 export function UserStorage({ children }) {
   const [login, setLogin] = React.useState(false);
