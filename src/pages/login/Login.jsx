@@ -1,16 +1,14 @@
 import React from "react";
 import styles from "./Login.module.scss";
-import useFetch from "../../hooks/useFetch";
+import useLogin from "../../hooks/useLogin";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/general/Input";
-import { GlobalContext } from "../../context/GlobalContext";
 
 function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const { loginLoading, loginError, signIn } = useLogin();
   const navigate = useNavigate();
-  const { setLogin } = React.useContext(GlobalContext);
-  const { data, loading, error, request } = useFetch();
 
   React.useEffect(() => {
     const user = localStorage.getItem('user')
@@ -19,14 +17,7 @@ function Login() {
       navigate('/minhaconta')
     }
 
-    if (data && data.token) {
-      localStorage.setItem("token", data.token);
-
-      setLogin(true);
-      navigate('/minhaconta')
-    }
-
-  }, [data]);
+  }, []);
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -39,7 +30,7 @@ function Login() {
       body: JSON.stringify({ email, password }),
     };
 
-    request("https://new-project-server.herokuapp.com/login", options);
+    signIn("https://new-project-server.herokuapp.com/login", options);
   }
 
   return (
@@ -61,7 +52,7 @@ function Login() {
         value={password}
       />
 
-      {loading ? (
+      {loginLoading ? (
         <button className={styles.loading} disabled>
           Carregando...
         </button>
@@ -69,7 +60,7 @@ function Login() {
         <button>Entrar</button>
       )}
 
-      {error && <p className={styles.error}>{error}</p>}
+      {loginError && <p className={styles.error}>{loginError}</p>}
 
       <p className={styles.footer}>
         Ainda não é cadastrado?{" "}
