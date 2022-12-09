@@ -25,7 +25,7 @@ function MyAccount() {
     const token = localStorage.getItem("token");
 
     if (token) {
-      const url = "https://new-project-server.herokuapp.com/getuser";
+      const url = "https://new-project-server.vercel.app/getuser";
 
       const options = {
         method: "GET",

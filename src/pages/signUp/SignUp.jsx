@@ -24,7 +24,7 @@ function SignUp() {
         body: JSON.stringify({ email, password }),
       }
 
-      signIn('https://new-project-server.herokuapp.com/login', options)
+      signIn('https://new-project-server.vercel.app/login', options)
     }
   }, [data])
 
@@ -45,7 +45,7 @@ function SignUp() {
       }),
     };
 
-    const url = "https://new-project-server.herokuapp.com/newuser"
+    const url = "https://new-project-server.vercel.app/newuser"
 
     request(url, options);
   }

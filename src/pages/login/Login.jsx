@@ -30,7 +30,7 @@ function Login() {
       body: JSON.stringify({ email, password }),
     };
 
-    signIn("https://new-project-server.herokuapp.com/login", options);
+    signIn("https://new-project-server.vercel.app/login", options);
   }
 
   return (
@@ -63,7 +63,7 @@ function Login() {
       {loginError && <p className={styles.error}>{loginError}</p>}
 
       <p className={styles.footer}>
-        Ainda não é cadastrado?{" "}
+        Ainda não é cadastrado?
         <Link className={styles.footerLink} to={"/cadastrar"}>
           Cadastre-se
         </Link>
