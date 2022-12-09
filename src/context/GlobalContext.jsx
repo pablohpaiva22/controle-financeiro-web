@@ -6,8 +6,6 @@ export function UserStorage({ children }) {
   const [login, setLogin] = React.useState(false);
 
   React.useEffect(() => {
-    fetch('https://new-project-server.herokuapp.com')
-
     const user = localStorage.getItem('user')
 
     if (user) {
