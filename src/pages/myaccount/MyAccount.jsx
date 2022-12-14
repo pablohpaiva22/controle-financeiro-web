@@ -1,47 +1,50 @@
 import React from "react";
 import styles from "./MyAccount.module.scss";
-import useFetch from "../../hooks/useFetch";
-import { useNavigate } from "react-router-dom";
-import { GlobalContext } from "../../context/GlobalContext";
 
 function MyAccount() {
-  const { request, data, error, loading } = useFetch();
-  const { setLogin } = React.useContext(GlobalContext);
-  const navigate = useNavigate();
-
-  React.useEffect(() => {
-    if (data) {
-      localStorage.setItem("user", JSON.stringify(data));
-    }
-
-    if (error) {
-      navigate("/login");
-      localStorage.clear();
-      setLogin(false);
-    }
-  }, [data, error]);
-
-  React.useEffect(() => {
-    const token = localStorage.getItem("token");
-
-    if (token) {
-      const url = "https://new-project-server.vercel.app/getuser";
-
-      const options = {
-        method: "GET",
-        headers: { authorization: "Bearer " + token },
-      };
-
-      request(url, options);
-    } else {
-      navigate("/login");
-    }
-  }, []);
 
   return (
     <div className={styles.container}>
-      {data && <img src="src/assets/logo-black.png" alt="" />}
-      {loading && <div className={styles.loading}></div>}
+      <button className={`${styles.newItemButton} btn btn-warning`}>NOVO FILME</button>
+
+      <table className="table">
+        <thead className="thead-light">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Nota</th>
+            <th scope="col">Comentário</th>
+            <th scope="col">Data</th>
+            <th scope="col">Mais...</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton de</td>
+            <td>@fat</td>
+            <td>@fat</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+            <td>@twitter</td>
+            <td>@twitter</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   );
 }

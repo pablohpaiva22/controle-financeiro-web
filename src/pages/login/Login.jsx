@@ -1,20 +1,24 @@
 import React from "react";
 import styles from "./Login.module.scss";
-import useLogin from "../../hooks/useLogin";
+import useFetch from "../../hooks/useFetch";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/general/Input";
+import { GlobalContext } from "../../context/GlobalContext";
 
 function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const { loginLoading, loginError, signIn } = useLogin();
+  const { data, loading, error, request } = useFetch();
+  const { data: loginData, loading: loginLoading, error: loginError , request: loginRequest } = useFetch();
+  const { setLogin } = React.useContext(GlobalContext);
   const navigate = useNavigate();
-
+  
   React.useEffect(() => {
     const user = localStorage.getItem('user')
-
+    
     if (user) {
-      navigate('/minhaconta')
+      const { id } = JSON.parse(user)
+      navigate(`/minhaconta/${id}`)
     }
 
   }, []);
@@ -30,8 +34,39 @@ function Login() {
       body: JSON.stringify({ email, password }),
     };
 
-    signIn("https://new-project-server.vercel.app/login", options);
+    request("https://new-project-server.vercel.app/login", options);
   }
+
+  React.useEffect(() => {
+    if (data && data.token) {
+      localStorage.setItem("token", data.token);
+
+      setLogin(true);
+
+      const url = "https://new-project-server.vercel.app/getuser";
+  
+      const options = {
+        method: "GET",
+        headers: { authorization: "Bearer " + data.token },
+      };
+
+      loginRequest(url, options);
+    }
+  }, [data]);
+
+  React.useEffect(() => {
+    if (loginData) {
+      localStorage.setItem("user", JSON.stringify(loginData));
+      navigate(`/minhaconta/${loginData.id}`)
+    }
+
+    if (error) {
+      navigate("/login");
+      localStorage.clear();
+      setLogin(false);
+    }
+
+  }, [loginData, loginError]);
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
@@ -52,7 +87,7 @@ function Login() {
         value={password}
       />
 
-      {loginLoading ? (
+      {loading || loginLoading ? (
         <button className={styles.loading} disabled>
           Carregando...
         </button>
@@ -60,7 +95,7 @@ function Login() {
         <button>Entrar</button>
       )}
 
-      {loginError && <p className={styles.error}>{loginError}</p>}
+      {error && <p className={styles.error}>{error}</p>}
 
       <p className={styles.footer}>
         Ainda não é cadastrado?
