@@ -18,7 +18,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/cadastrar" element={<SignUp />} />
-            <Route path="/minhaconta" element={<MyAccount />} />
+            <Route path="/minhaconta/:id" element={<MyAccount />} />
           </Routes>
         </UserStorage>
       </BrowserRouter>
