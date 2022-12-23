@@ -20,7 +20,7 @@ function Header() {
       <div className={styles.container}>
         <div className={styles.logo}>
           <Link to='/'>
-            <img src="../../src/assets/logo-white.png" alt="" />
+            <img src="../../src/assets/cifrao.png" alt="logo imagem de um cifrao" />
           </Link>
         </div>
 
@@ -32,7 +32,7 @@ function Header() {
                   to="/minhaconta"
                   className={styles.link}
                   style={({ isActive }) =>
-                    isActive ? { color: "rgb(255, 110, 43)" } : undefined
+                    isActive ? { color: "#19880F" } : undefined
                   }
                 >
                   Minha Conta
@@ -50,7 +50,7 @@ function Header() {
               to="/login"
               className={styles.link}
               style={({ isActive }) =>
-                isActive ? { color: "rgb(255, 110, 43)" } : undefined
+                isActive ? { color: "#19880F" } : undefined
               }
             >
               Entrar

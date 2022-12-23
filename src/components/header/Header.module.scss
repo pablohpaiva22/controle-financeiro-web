@@ -1,9 +1,10 @@
 .header {
-  background: black;
+  background: #1d1d1d;
 }
 
 .container {
   max-width: 1200px;
+  min-height: 100px;
   margin: 0 auto;
   padding: 0 1rem;
   color: #fff;
@@ -15,32 +16,10 @@
 .logo {
   display: block;
   padding: 0.5rem;
-  width: 100px;
-  color: #fff;
-  text-decoration: none;
+  width: 80px;
   a {
     display: block;
   }
-  img {
-    margin-top: 4px;
-  }
-}
-
-.link {
-  color: #fff;
-  text-decoration: none;
-  display: block;
-  padding: 0.5rem;
-  &:hover {
-    color: var(--color-primary);
-  }
-  &:focus {
-      color: var(--color-primary);
-  }
-}
-
-.activeStyle {
-  color: var(--color-primary);
 }
 
 .nav {
@@ -50,18 +29,35 @@
   }
 }
 
+.link {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 0.5rem;
+  &:hover {
+    color: var(--color-green);
+  }
+  &:focus {
+    color: var(--color-green);
+  }
+}
+
+.activeStyle {
+  color: var(--color-green);
+}
+
 .button {
   display: block;
   border: none;
   padding: 0.5rem;
   color: #fff;
-  background: #000;
+  background: #1d1d1d;
   font-size: 1rem;
   cursor: pointer;
   &:hover {
-    color: var(--color-primary);
+    color: var(--color-green);
   }
   &:focus {
-    color: var(--color-primary);
-}
+    color: var(--color-green);
+  }
 }
