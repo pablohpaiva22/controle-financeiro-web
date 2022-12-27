@@ -1,9 +1,222 @@
+@import "../../styles/mixins.scss";
+@import "../../styles/variables.scss";
+
 .container {
+  margin: 0 auto;
+  padding: 1rem;
   max-width: 1200px;
-  margin: 3rem auto;
-  padding: 0 1rem;
+  position: relative;
+  h1 {
+    margin-bottom: 4rem;
+    text-align: center;
+    @include device(small) {
+      margin-bottom: 2rem;
+      font-size: 1.6rem;
+    }
+  }
 }
 
-.newItemButton {
-  margin-bottom: 3rem;
+.welcomeMessage {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+  @include device(medium) {
+    font-size: 0.8rem;
+    display: block;
+    margin-bottom: 3rem;
+  }
+}
+
+.balanceInfo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.balance {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  span:first-child {
+    font-weight: bold;
+    display: block;
+  }
+  span:last-child {
+    font-size: 2.25rem;
+    color: $color-blue;
+    white-space: nowrap;
+    @include device(small) {
+      font-size: 1.6rem;
+    }
+  }
+}
+
+.inputOutput {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  @include device(small) {
+    gap: 1rem;
+  }
+  @include device(xSmall) {
+    flex-wrap: wrap;
+  }
+  .input,
+  .output {
+    background: $color-white;
+    padding: 0.5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;
+    span:first-child {
+      display: block;
+      font-size: 0.8rem;
+    }
+    span:last-child {
+      font-size: 1.3rem;
+      color: $color-blue;
+      white-space: nowrap;
+      @include device(small) {
+      }
+    }
+  }
+  .input {
+    color: $color-green;
+  }
+  .output {
+    color: $color-red;
+  }
+}
+
+.dollarSignBg {
+  width: 100%;
+  position: absolute;
+  top: 70px;
+  left: 0;
+  z-index: -1;
+}
+
+.dollarSign {
+  max-width: 350px;
+  margin: 0 auto;
+}
+
+.newTransactionBtn {
+  margin-top: 3rem;
+  margin-left: calc(50% - 106px);
+  width: 212px;
+  padding: 0.9rem 1rem;
+  background: $color-blue;
+  border: none;
+  color: $color-white;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  &:hover {
+    background: $color-blue-hover;
+  }
+  @include device(small) {
+    font-size: 0.7rem;
+    width: 130px;
+    padding: 0.7rem 1rem;
+    border-radius: 0.3rem;
+    margin-left: calc(50% - 65px);
+  }
+}
+
+.transactionsContainer {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: $color-white;
+  min-height: 262px;
+  border-radius: 1rem;
+  position: relative;
+  @include device(small) {
+    padding: 1rem;
+  }
+  h2 {
+    @include device(small) {
+      font-size: 1.1rem;
+    }
+    &::after {
+      content: "";
+      margin-top: 0.25rem;
+      display: block;
+      background: $color-gray-detail;
+      height: 1px;
+      width: 100%;
+    }
+  }
+}
+
+.transactions {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  @include device(small) {
+    gap: 0.9rem;
+  }
+  p,
+  span {
+    @include device(small) {
+      font-size: 0.9rem;
+    }
+  }
+  .date {
+    font-size: 0.8rem;
+    color: $color-gray-detail-dark;
+    @include device(small) {
+      font-size: 0.7rem;
+    }
+  }
+  .description {
+    flex: 1;
+  }
+  .price {
+    position: relative;
+    margin-right: 2rem;
+    @include device(small) {
+      margin-right: 1rem;
+    }
+    &::after {
+      content: "";
+      margin-left: 2rem;
+      display: inline-block;
+      width: 4px;
+      border-radius: 1px;
+      height: 24px;
+      background:$color-red;
+      position: absolute;
+      top: -3px;
+      @include device(small) {
+        margin-left: 1rem;
+      }
+    }
+  }
+  .deleteIcon {
+    width: 24px;
+  }
+}
+
+.pigImage {
+  width: 110px;
+  position: absolute;
+  top: -89px;
+  right: 150px;
+  @include device(medium) {
+    width: 90px;
+    top: -74px;
+    right: 0px;
+  }
+  @include device(small) {
+    width: 60px;
+    top: -49px;
+    right: 0px;
+  }
 }
