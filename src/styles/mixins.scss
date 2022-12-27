@@ -1,0 +1,17 @@
+@mixin device($size) {
+  @if $size == medium {
+    @media screen and (max-width: 790px) {
+      @content;
+    }
+  }
+  @if $size == small {
+    @media screen and (max-width: 500px) {
+      @content;
+    }
+  }
+  @if $size == xSmall {
+    @media screen and (max-width: 360px) {
+      @content;
+    }
+  }
+}
