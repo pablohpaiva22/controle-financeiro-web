@@ -1,3 +1,5 @@
+@import '../../styles/variables.scss';
+
 .header {
   background: #1d1d1d;
 }
@@ -15,8 +17,7 @@
 
 .logo {
   display: block;
-  padding: 0.5rem;
-  width: 80px;
+  width: 62px;
   a {
     display: block;
   }
@@ -35,10 +36,10 @@
   display: block;
   padding: 0.5rem;
   &:hover {
-    color: var(--color-green);
+    color: $color-green;
   }
   &:focus {
-    color: var(--color-green);
+    color: $color-green;
   }
 }
 
@@ -55,9 +56,9 @@
   font-size: 1rem;
   cursor: pointer;
   &:hover {
-    color: var(--color-green);
+    color: $color-green;
   }
   &:focus {
-    color: var(--color-green);
+    color: $color-green;
   }
 }
