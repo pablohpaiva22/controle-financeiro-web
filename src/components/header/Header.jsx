@@ -35,7 +35,7 @@ function Header() {
                     isActive ? { color: "#19880F" } : undefined
                   }
                 >
-                  Minha Conta
+                  Pablo Paiva
                 </NavLink>
               </li>
               
