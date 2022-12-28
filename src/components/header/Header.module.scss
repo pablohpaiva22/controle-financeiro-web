@@ -36,15 +36,12 @@
   display: block;
   padding: 0.5rem;
   &:hover {
-    color: $color-green;
-  }
-  &:focus {
-    color: $color-green;
+    color: $color-blue;
   }
 }
 
 .activeStyle {
-  color: var(--color-green);
+  color: var(--color-blue);
 }
 
 .button {
@@ -56,9 +53,9 @@
   font-size: 1rem;
   cursor: pointer;
   &:hover {
-    color: $color-green;
+    color: $color-blue;
   }
   &:focus {
-    color: $color-green;
+    color: $color-blue;
   }
 }
