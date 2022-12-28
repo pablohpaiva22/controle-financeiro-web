@@ -1,10 +1,11 @@
+@import '../../styles/variables.scss';
+
 .container {
   label {
     display: block;
-    color: #444;
+    color: $color-fonts;
     margin-bottom: 0.25rem;
   }
-  
   input {
     padding: 0.5rem;
     margin-bottom: 0.5rem;
@@ -14,8 +15,9 @@
     border-radius: 0.25rem;
     outline: none;
     &:focus {
-      border-color: rgb(255, 110, 43);
-      box-shadow: 0 0 4px 2px rgb(248, 176, 143);
+      border-color: #6e90c2;
+      box-shadow: 0 0 4px 2px #6e90c2;
+      background: rgb(247, 247, 247);
     }
   }
 }
