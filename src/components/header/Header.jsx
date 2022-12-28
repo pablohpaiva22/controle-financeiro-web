@@ -8,8 +8,6 @@ function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log(location.pathname);
-
   function handleClick(e) {
     e.preventDefault();
     localStorage.clear();
