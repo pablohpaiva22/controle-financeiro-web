@@ -8,6 +8,7 @@
   position: relative;
   h1 {
     margin-bottom: 4rem;
+    font-size: 2rem;
     text-align: center;
     @include device(small) {
       margin-bottom: 2rem;
@@ -42,6 +43,9 @@
   span:first-child {
     font-weight: bold;
     display: block;
+    @include device(small) {
+      font-size: 0.9rem;
+    }
   }
   span:last-child {
     font-size: 2.25rem;
@@ -76,12 +80,16 @@
     span:first-child {
       display: block;
       font-size: 0.8rem;
+      @include device(small) {
+        font-size: 0.7rem;
+      }
     }
     span:last-child {
       font-size: 1.3rem;
       color: $color-blue;
       white-space: nowrap;
       @include device(small) {
+        font-size: 1.1rem;
       }
     }
   }
