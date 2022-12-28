@@ -9,18 +9,22 @@ function Login() {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const { data, loading, error, request } = useFetch();
-  const { data: loginData, loading: loginLoading, error: loginError , request: loginRequest } = useFetch();
+  const {
+    data: loginData,
+    loading: loginLoading,
+    error: loginError,
+    request: loginRequest,
+  } = useFetch();
   const { setLogin } = React.useContext(GlobalContext);
   const navigate = useNavigate();
-  
-  React.useEffect(() => {
-    const user = localStorage.getItem('user')
-    
-    if (user) {
-      const { id } = JSON.parse(user)
-      navigate(`/minhaconta/${id}`)
-    }
 
+  React.useEffect(() => {
+    const user = localStorage.getItem("user");
+
+    if (user) {
+      const { id } = JSON.parse(user);
+      navigate(`/minhaconta/${id}`);
+    }
   }, []);
 
   async function handleSubmit(event) {
@@ -44,7 +48,7 @@ function Login() {
       setLogin(true);
 
       const url = "https://new-project-server.vercel.app/getuser";
-  
+
       const options = {
         method: "GET",
         headers: { authorization: "Bearer " + data.token },
@@ -57,7 +61,7 @@ function Login() {
   React.useEffect(() => {
     if (loginData) {
       localStorage.setItem("user", JSON.stringify(loginData));
-      navigate(`/minhaconta/${loginData.id}`)
+      navigate(`/minhaconta/${loginData.id}`);
     }
 
     if (error) {
@@ -65,45 +69,46 @@ function Login() {
       localStorage.clear();
       setLogin(false);
     }
-
   }, [loginData, loginError]);
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-      <h2>Login</h2>
+    <section className={styles.container}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <h2>Login</h2>
 
-      <Input
-        label="E-mail"
-        id="loginEmail"
-        type="email"
-        setValue={setEmail}
-        value={email}
-      />
-      <Input
-        label="Senha"
-        id="pass"
-        type="password"
-        setValue={setPassword}
-        value={password}
-      />
+        <Input
+          label="E-mail"
+          id="loginEmail"
+          type="email"
+          setValue={setEmail}
+          value={email}
+        />
+        <Input
+          label="Senha"
+          id="pass"
+          type="password"
+          setValue={setPassword}
+          value={password}
+        />
 
-      {loading || loginLoading ? (
-        <button className={styles.loading} disabled>
-          Carregando...
-        </button>
-      ) : (
-        <button>Entrar</button>
-      )}
+        {loading || loginLoading ? (
+          <button className={styles.loading} disabled>
+            Carregando...
+          </button>
+        ) : (
+          <button>Entrar</button>
+        )}
 
-      {error && <p className={styles.error}>{error}</p>}
+        {error && <p className={styles.error}>{error}</p>}
 
-      <p className={styles.footer}>
-        Ainda não é cadastrado?
-        <Link className={styles.footerLink} to={"/cadastrar"}>
-          Cadastre-se
-        </Link>
-      </p>
-    </form>
+        <p className={styles.footer}>
+          Ainda não é cadastrado?{" "}
+          <Link className={styles.footerLink} to={"/cadastrar"}>
+            Sign-up
+          </Link>
+        </p>
+      </form>
+    </section>
   );
 }
 
