@@ -65,7 +65,7 @@ function Login() {
     }
 
     if (error) {
-      navigate("/login");
+      navigate("/");
       localStorage.clear();
       setLogin(false);
     }
