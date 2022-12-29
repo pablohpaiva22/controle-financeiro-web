@@ -7,6 +7,7 @@ function Header() {
   const { login, setLogin } = React.useContext(GlobalContext);
   const navigate = useNavigate();
   const location = useLocation();
+  const user = JSON.parse(localStorage.getItem("user"));
 
   function handleClick(e) {
     e.preventDefault();
@@ -32,15 +33,7 @@ function Header() {
           {login ? (
             <ul>
               <li>
-                <NavLink
-                  to="/minhaconta"
-                  className={styles.link}
-                  style={({ isActive }) =>
-                    isActive ? { color: "#4b6b9b" } : undefined
-                  }
-                >
-                  Pablo Paiva
-                </NavLink>
+                {user && user.name}
               </li>
 
               <li>

@@ -26,7 +26,11 @@
 .nav {
   ul {
     display: flex;
+    align-items: center;
     gap: 1rem;
+    &:first-child {
+      color: $color-blue;
+    }
   }
 }
 
