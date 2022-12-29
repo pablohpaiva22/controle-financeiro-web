@@ -1,10 +1,27 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styles from "./MyAccount.module.scss";
 
 function MyAccount() {
-  function handleClick() {
-    console.log('oi')
-  }
+  const [username, setUsername] = React.useState('')
+  const navigate = useNavigate()
+  const { pathname } = useLocation()
+
+  React.useEffect(() => {
+    const user = localStorage.getItem('user')
+    
+    if (user) {
+      const userObj = JSON.parse(user)
+      const getId = Number(pathname.replace('/minhaconta/', " "))
+      if (getId === userObj.id) {
+        setUsername(userObj.name)
+      } else {
+        navigate('/')
+      }
+    } else {
+      navigate('/')
+    }
+  }, [])
 
   return (
     <section className={styles.container}>
@@ -17,7 +34,7 @@ function MyAccount() {
         </div>
       </div>
 
-      <span className={styles.welcomeMessage}>Bem-vindo, Pablo!!!</span>
+      <span className={styles.welcomeMessage}>Bem-vindo, {username}!!!</span>
 
       <h1>CONTROLE FINANCEIRO</h1>
 
@@ -40,7 +57,7 @@ function MyAccount() {
         </div>
       </div>
 
-      <button onClick={handleClick} className={styles.newTransactionBtn}>NOVA TRANSAÇÃO</button>
+      <button className={styles.newTransactionBtn}>NOVA TRANSAÇÃO</button>
 
       <div className={styles.transactionsContainer}>
         <h2>TRANSAÇÕES</h2>
