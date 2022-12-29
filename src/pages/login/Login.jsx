@@ -64,7 +64,7 @@ function Login() {
       navigate(`/minhaconta/${loginData.id}`);
     }
 
-    if (error) {
+    if (loginError) {
       navigate("/");
       localStorage.clear();
       setLogin(false);
