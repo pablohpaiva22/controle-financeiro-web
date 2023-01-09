@@ -1,27 +1,58 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import useFetch from "../../hooks/useFetch";
 import styles from "./MyAccount.module.scss";
+import { GlobalContext } from "../../context/GlobalContext";
 
 function MyAccount() {
-  const [username, setUsername] = React.useState('')
-  const navigate = useNavigate()
-  const { pathname } = useLocation()
+  const [username, setUsername] = React.useState("");
+  const { pathname } = useLocation();
+  const { data, error, loading, request } = useFetch();
+  const { setLogin } = React.useContext(GlobalContext);
+  const navigate = useNavigate();
 
   React.useEffect(() => {
-    const user = localStorage.getItem('user')
-    
+    if (error === "Falha na autentificação - Token inválido") {
+      navigate("/");
+      localStorage.clear();
+      setLogin(false);
+    }
+  }, [error]);
+
+  React.useEffect(() => {
+    const user = localStorage.getItem("user");
+
     if (user) {
-      const userObj = JSON.parse(user)
-      const getId = Number(pathname.replace('/minhaconta/', " "))
+      const userObj = JSON.parse(user);
+      const getId = Number(pathname.replace("/minhaconta/", " "));
       if (getId === userObj.id) {
-        setUsername(userObj.name)
+        setUsername(userObj.name);
       } else {
-        navigate('/')
+        navigate("/");
       }
     } else {
-      navigate('/')
+      navigate("/");
     }
-  }, [])
+
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      const url = "https://new-project-server.vercel.app/gettransactions";
+
+      const options = {
+        method: "GET",
+        headers: { authorization: "Bearer " + token },
+      };
+
+      request(url, options);
+    } else {
+      navigate("/");
+    }
+  }, []);
+
+  React.useEffect(() => {
+
+  }, [data])
 
   return (
     <section className={styles.container}>
@@ -62,15 +93,41 @@ function MyAccount() {
       <div className={styles.transactionsContainer}>
         <h2>TRANSAÇÕES</h2>
 
-        <div className={styles.transactions}>
-          <span className={styles.date}>09/10</span>
-          <p className={styles.description}>Corte de cabelo</p>
-          <span className={styles.price}>R$ 30,00</span>
-          <img
-            className={styles.deleteIcon}
-            src="../../src/assets/delete-icon.png"
-            alt="delete icon"
-          />
+        <div className={styles.transactionsBox}>
+          {data &&
+            data.map((item) => {
+              return (
+                <div key={item.id} className={styles.transactions}>
+                  <span className={styles.date}>{item.date}</span>
+                  <p className={styles.description}>{item.description}</p>
+                  <div className={styles.price}>
+                    <span>R$ {item.price}</span>
+                    <span
+                      style={
+                        item.type === "entrada"
+                          ? { background: "#19880f" }
+                          : { background: "#ef1111" }
+                      }
+                      className={styles.tag}
+                    ></span>
+                  </div>
+                  <div className={styles.deleteIcon}>
+                    <img
+                      src="../../src/assets/delete-icon.png"
+                      alt="delete icon"
+                    />
+                  </div>
+                </div>
+              );
+            })}
+
+          {data?.length === 0 && (
+            <p className={styles.transactionsMessage}>
+              Ainda não há nenhuma transação.
+            </p>
+          )}
+
+          {loading && <p className={styles.loading}>Carregando...</p>}
         </div>
 
         <div className={styles.pigImage}>
