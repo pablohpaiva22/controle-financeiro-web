@@ -9,6 +9,7 @@ function MyAccount() {
   const { pathname } = useLocation();
   const { data, error, loading, request } = useFetch();
   const { setLogin } = React.useContext(GlobalContext);
+  const [ transactionsArray, setTransactionsArray] = React.useState([])
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -51,7 +52,9 @@ function MyAccount() {
   }, []);
 
   React.useEffect(() => {
-
+    if (data) {
+      setTransactionsArray(data.reverse())
+    }
   }, [data])
 
   return (
@@ -94,8 +97,8 @@ function MyAccount() {
         <h2>TRANSAÇÕES</h2>
 
         <div className={styles.transactionsBox}>
-          {data &&
-            data.map((item) => {
+          {transactionsArray &&
+            transactionsArray.map((item) => {
               return (
                 <div key={item.id} className={styles.transactions}>
                   <span className={styles.date}>{item.date}</span>
