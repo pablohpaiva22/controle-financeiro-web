@@ -2,10 +2,10 @@ import React from "react";
 import styles from "./Input.module.scss";
 import PropTypes from "prop-types";
 
-function Input({ label, type, id, value, setValue, placehoder }) {
+function Input({ label, type, id, value, setValue, placehoder, labelColor }) {
   return (
     <div className={styles.container}>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id} style={{color: labelColor}}>{label}</label>
       <input
         type={type}
         id={id}
