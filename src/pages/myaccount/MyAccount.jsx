@@ -4,6 +4,7 @@ import useFetch from "../../hooks/useFetch";
 import styles from "./MyAccount.module.scss";
 import { GlobalContext } from "../../context/GlobalContext";
 import Transactions from "./Transactions";
+import Modal from './Modal'
 
 function MyAccount() {
   const [username, setUsername] = React.useState("");
@@ -11,6 +12,11 @@ function MyAccount() {
   const { data, error, loading, request } = useFetch();
   const { setLogin } = React.useContext(GlobalContext);
   const navigate = useNavigate();
+  const [modal, setModal] = React.useState(false)
+
+  const handleClick = () => {
+    setModal((modal) => !modal)
+  }
 
   React.useEffect(() => {
     if (error === "Falha na autentificação - Token inválido") {
@@ -85,7 +91,7 @@ function MyAccount() {
         </div>
       </div>
 
-      <button className={styles.newTransactionBtn}>NOVA TRANSAÇÃO</button>
+      <button onClick={handleClick} className={styles.newTransactionBtn}>NOVA TRANSAÇÃO</button>
 
       <div className={styles.transactionsContainer}>
         <h2>TRANSAÇÕES</h2>
@@ -96,6 +102,8 @@ function MyAccount() {
           <img src="../../src/assets/pig.png" alt="cofrinho de porquinho" />
         </div>
       </div>
+
+      {modal && <Modal setModal={setModal} />}
     </section>
   );
 }
