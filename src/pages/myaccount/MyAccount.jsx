@@ -4,7 +4,7 @@ import useFetch from "../../hooks/useFetch";
 import styles from "./MyAccount.module.scss";
 import { GlobalContext } from "../../context/GlobalContext";
 import Transactions from "./Transactions";
-import Modal from './Modal'
+import Modal from "./Modal";
 
 function MyAccount() {
   const [username, setUsername] = React.useState("");
@@ -12,11 +12,12 @@ function MyAccount() {
   const { data, error, loading, request } = useFetch();
   const { setLogin } = React.useContext(GlobalContext);
   const navigate = useNavigate();
-  const [modal, setModal] = React.useState(false)
+  const [modal, setModal] = React.useState(false);
+  const [updateTransactions, setUpdateTransactions] = React.useState(false);
 
   const handleClick = () => {
-    setModal((modal) => !modal)
-  }
+    setModal((modal) => !modal);
+  };
 
   React.useEffect(() => {
     if (error === "Falha na autentificação - Token inválido") {
@@ -55,7 +56,7 @@ function MyAccount() {
     } else {
       navigate("/");
     }
-  }, []);
+  }, [updateTransactions]);
 
   return (
     <section className={styles.container}>
@@ -91,19 +92,26 @@ function MyAccount() {
         </div>
       </div>
 
-      <button onClick={handleClick} className={styles.newTransactionBtn}>NOVA TRANSAÇÃO</button>
+      <button onClick={handleClick} className={styles.newTransactionBtn}>
+        NOVA TRANSAÇÃO
+      </button>
 
       <div className={styles.transactionsContainer}>
         <h2>TRANSAÇÕES</h2>
 
-        <Transactions data={data} loading={loading}/>
+        <Transactions data={data} loading={loading} />
 
         <div className={styles.pigImage}>
           <img src="../../src/assets/pig.png" alt="cofrinho de porquinho" />
         </div>
       </div>
 
-      {modal && <Modal setModal={setModal} />}
+      {modal && (
+        <Modal
+          setModal={setModal}
+          setUpdateTransactions={setUpdateTransactions}
+        />
+      )}
     </section>
   );
 }
