@@ -2,11 +2,12 @@ import React from "react";
 import styles from "./Input.module.scss";
 import PropTypes from "prop-types";
 
-function Input({ label, type, id, value, setValue, placehoder, labelColor }) {
+function Input({ label, type, id, value, setValue, placehoder, labelColor, maxLength }) {
   return (
     <div className={styles.container}>
       <label htmlFor={id} style={{color: labelColor}}>{label}</label>
       <input
+        maxLength={maxLength}
         type={type}
         id={id}
         value={value}
