@@ -67,3 +67,14 @@
     background: $color-gray-detail;
   }
 }
+
+.emptyFieldError {
+  margin-top: 1rem;
+  font-weight: bold;
+}
+
+.requestError {
+  display: block;
+  margin-top: 1rem;
+  font-weight: bold;
+}

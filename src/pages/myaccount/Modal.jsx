@@ -1,14 +1,63 @@
 import React from "react";
 import styles from "./Modal.module.scss";
 import Input from "../../components/general/Input";
+import useFetch from "../../hooks/useFetch";
 
-function Modal({ setModal }) {
+function Modal({ setModal, setUpdateTransactions }) {
   const [description, setDescription] = React.useState("");
   const [price, setPrice] = React.useState("");
+  const [type, setType] = React.useState("");
+  const [emptyFieldError, setEmptyFieldError] = React.useState(false);
+  const { data, loading, error, request } = useFetch();
 
+  React.useEffect(() => {
+    if (data && data.msg === 'Nova transação criada com sucesso!') {
+      setModal(false)
+      setUpdateTransactions((updateTransactions) => !updateTransactions)
+    }
+  }, [data])
+  
   const handleClick = (event) => {
     if (event.target.id === "modal") {
-      setModal(false)
+      setModal(false);
+    }
+  };
+
+  const handleChange = (e) => {
+    setType(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const useriD = JSON.parse(localStorage.getItem("user"));
+    const id_user = useriD.id;
+
+    const newDate = Date.now();
+    const date = new Date(newDate).toJSON().slice(0, 10);
+
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      if (description.length && price.length && type.length !== 0) {
+        setEmptyFieldError(false);
+
+        const url = "http://127.0.0.1:3333/newtransaction";
+
+        const options = {
+          method: "POST",
+          headers: {
+            authorization: "Bearer " + token,
+            "Content-Type": "application/json",
+          },
+
+          body: JSON.stringify({ description, price, type, id_user, date }),
+        };
+
+        request(url, options);
+      } else {
+        setEmptyFieldError(true);
+      }
     }
   };
 
@@ -17,7 +66,7 @@ function Modal({ setModal }) {
       <div className={styles.modal}>
         <h2>NOVA TRANSAÇÃO</h2>
 
-        <form className={styles.newTransactionForm}>
+        <form onSubmit={handleSubmit} className={styles.newTransactionForm}>
           <Input
             label="DESCRIÇÃO"
             type="text"
@@ -25,6 +74,7 @@ function Modal({ setModal }) {
             value={description}
             setValue={setDescription}
             labelColor="white"
+            maxLength={15}
           />
           <Input
             label="VALOR"
@@ -45,6 +95,8 @@ function Modal({ setModal }) {
                   id="typeInput"
                   name="type"
                   className={styles.typeInput}
+                  onChange={handleChange}
+                  value="entrada"
                 />
                 <label htmlFor="typeInput" className={styles.typeLabel}>
                   Entrada
@@ -57,6 +109,8 @@ function Modal({ setModal }) {
                   id="typeOutput"
                   className={styles.typeOutput}
                   name="type"
+                  onChange={handleChange}
+                  value="saida"
                 />
                 <label htmlFor="typeOutput" className={styles.typeLabel}>
                   Saída
@@ -65,7 +119,15 @@ function Modal({ setModal }) {
             </div>
           </div>
 
-          <button className={styles.modalButton}>CRIAR </button>
+          {loading ? (
+            <button className={styles.modalButton}>CRIANDO...</button>
+          ) : (
+            <button className={styles.modalButton}>CRIAR</button>
+          )}
+
+          {error && <span className={styles.requestError}>Error.</span>}
+
+          {emptyFieldError && <p className={styles.emptyFieldError}>Preencha os campos vazios.</p>}
         </form>
       </div>
     </div>
