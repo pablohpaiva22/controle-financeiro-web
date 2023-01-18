@@ -86,7 +86,11 @@ function MyAccount() {
       <div className={styles.transactionsContainer}>
         <h2>TRANSAÇÕES</h2>
 
-        <Transactions data={data} loading={loading} />
+        <Transactions
+          data={data}
+          loading={loading}
+          setUpdateTransactions={setUpdateTransactions}
+        />
 
         <div className={styles.pigImage}>
           <img src="../../src/assets/pig.png" alt="cofrinho de porquinho" />
