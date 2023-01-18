@@ -1,19 +1,20 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { GlobalContext } from "../../context/GlobalContext";
 import useFetch from "../../hooks/useFetch";
 import styles from "./MyAccount.module.scss";
-import { GlobalContext } from "../../context/GlobalContext";
 import Transactions from "./Transactions";
 import Modal from "./Modal";
+import BalanceInfo from "./BalanceInfo";
 
 function MyAccount() {
   const [username, setUsername] = React.useState("");
+  const [updateTransactions, setUpdateTransactions] = React.useState(false);
+  const [modal, setModal] = React.useState(false);
   const { pathname } = useLocation();
   const { data, error, loading, request } = useFetch();
   const { setLogin } = React.useContext(GlobalContext);
   const navigate = useNavigate();
-  const [modal, setModal] = React.useState(false);
-  const [updateTransactions, setUpdateTransactions] = React.useState(false);
 
   const handleClick = () => {
     setModal((modal) => !modal);
@@ -22,7 +23,9 @@ function MyAccount() {
   React.useEffect(() => {
     if (error === "Falha na autentificação - Token inválido") {
       navigate("/");
+
       localStorage.clear();
+
       setLogin(false);
     }
   }, [error]);
@@ -33,6 +36,7 @@ function MyAccount() {
     if (user) {
       const userObj = JSON.parse(user);
       const getId = Number(pathname.replace("/minhaconta/", " "));
+
       if (getId === userObj.id) {
         setUsername(userObj.name);
       } else {
@@ -73,24 +77,7 @@ function MyAccount() {
 
       <h1>CONTROLE FINANCEIRO</h1>
 
-      <div className={styles.balanceInfo}>
-        <div className={styles.balance}>
-          <span>SALDO</span>
-          <span>R$ 500,00</span>
-        </div>
-
-        <div className={styles.inputOutput}>
-          <div className={styles.input}>
-            <span>ENTRADAS</span>
-            <span>R$ 500,00</span>
-          </div>
-
-          <div className={styles.output}>
-            <span>SAÍDAS</span>
-            <span>R$ 500,00</span>
-          </div>
-        </div>
-      </div>
+      <BalanceInfo data={data} updateTransactions={updateTransactions} />
 
       <button onClick={handleClick} className={styles.newTransactionBtn}>
         NOVA TRANSAÇÃO
