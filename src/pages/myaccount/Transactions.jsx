@@ -36,7 +36,7 @@ function Transactions({ data, loading }) {
           );
         })}
 
-      {data?.length === 0 && (
+      {data?.length === 0 && !loading && (
         <p className={styles.transactionsMessage}>
           Ainda não há nenhuma transação.
         </p>
