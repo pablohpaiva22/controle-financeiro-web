@@ -6,9 +6,14 @@ import { GlobalContext } from "../../context/GlobalContext";
 
 function Transactions({ data, loading, setUpdateTransactions }) {
   const [transactionsArray, setTransactionsArray] = React.useState([]);
-  const { data: deleteData, loading: deleteLoading, error, request } = useFetch();
-  const navigate = useNavigate()
-  const { setLogin } = React.useContext(GlobalContext)
+  const {
+    data: deleteData,
+    loading: deleteLoading,
+    error,
+    request,
+  } = useFetch();
+  const navigate = useNavigate();
+  const { setLogin } = React.useContext(GlobalContext);
 
   React.useEffect(() => {
     if (data) {
@@ -18,9 +23,9 @@ function Transactions({ data, loading, setUpdateTransactions }) {
 
   React.useEffect(() => {
     if (deleteData) {
-      setUpdateTransactions((updateTransactions) => !updateTransactions)
+      setUpdateTransactions((updateTransactions) => !updateTransactions);
     }
-  }, [deleteData])
+  }, [deleteData]);
 
   function handleClick(event) {
     const token = localStorage.getItem("token");
@@ -54,7 +59,10 @@ function Transactions({ data, loading, setUpdateTransactions }) {
 
   return (
     <div className={styles.transactionsBox}>
-      {transactionsArray &&
+      {loading ? (
+        <p className={styles.loading}>Carregando...</p>
+      ) : (
+        transactionsArray &&
         transactionsArray.map((item) => {
           return (
             <div key={item.id} className={styles.transactions}>
@@ -75,7 +83,11 @@ function Transactions({ data, loading, setUpdateTransactions }) {
               </div>
 
               {deleteLoading ? (
-                <button disabled onClick={handleClick} className={styles.deleteIcon}>
+                <button
+                  disabled
+                  onClick={handleClick}
+                  className={styles.deleteIcon}
+                >
                   <img
                     id={item.id}
                     src="../../src/assets/delete-icon.png"
@@ -93,15 +105,14 @@ function Transactions({ data, loading, setUpdateTransactions }) {
               )}
             </div>
           );
-        })}
+        })
+      )}
 
       {data?.length === 0 && !loading && (
         <p className={styles.transactionsMessage}>
           Ainda não há nenhuma transação.
         </p>
       )}
-
-      {loading && <p className={styles.loading}>Carregando...</p>}
     </div>
   );
 }
