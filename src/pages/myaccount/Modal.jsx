@@ -42,7 +42,7 @@ function Modal({ setModal, setUpdateTransactions }) {
       if (description.length && price.length && type.length !== 0) {
         setEmptyFieldError(false);
 
-        const url = "http://127.0.0.1:3333/newtransaction";
+        const url = "https://new-project-server.vercel.app/newtransaction";
 
         const options = {
           method: "POST",
