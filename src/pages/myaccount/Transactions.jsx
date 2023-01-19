@@ -1,10 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import styles from "./Transactions.module.scss";
+import { GlobalContext } from "../../context/GlobalContext";
 
 function Transactions({ data, loading, setUpdateTransactions }) {
   const [transactionsArray, setTransactionsArray] = React.useState([]);
-  const { data: deleteData, loading: deleteLoading, request } = useFetch();
+  const { data: deleteData, loading: deleteLoading, error, request } = useFetch();
+  const navigate = useNavigate()
+  const { setLogin } = React.useContext(GlobalContext)
 
   React.useEffect(() => {
     if (data) {
@@ -22,7 +26,7 @@ function Transactions({ data, loading, setUpdateTransactions }) {
     const token = localStorage.getItem("token");
 
     if (token) {
-      const url = "http://127.0.0.1:3333/deletetransaction";
+      const url = "https://new-project-server.vercel.app/deletetransaction";
 
       const options = {
         method: "DELETE",
@@ -37,6 +41,16 @@ function Transactions({ data, loading, setUpdateTransactions }) {
       request(url, options);
     }
   }
+
+  React.useEffect(() => {
+    if (error === "Falha na autentificação - Token inválido") {
+      navigate("/");
+
+      localStorage.clear();
+
+      setLogin(false);
+    }
+  }, [error]);
 
   return (
     <div className={styles.transactionsBox}>
