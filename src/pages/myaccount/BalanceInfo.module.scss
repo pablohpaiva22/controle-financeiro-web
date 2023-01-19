@@ -68,8 +68,10 @@
   }
   .input {
     color: $color-green;
+    min-width: 152px;
   }
   .output {
     color: $color-red;
+    min-width: 152px;
   }
 }
