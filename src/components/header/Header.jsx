@@ -44,11 +44,11 @@ function Header() {
             </ul>
           ) : location.pathname == "/cadastrar" ? (
             <Link to="/" className={styles.link}>
-              Login
+              Entrar
             </Link>
           ) : (
             <Link to="/cadastrar" className={styles.link}>
-              Sign-up
+              Nova conta
             </Link>
           )}
         </nav>

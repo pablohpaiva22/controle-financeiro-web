@@ -104,7 +104,7 @@ function Login() {
         <p className={styles.footer}>
           Ainda não é cadastrado?{" "}
           <Link className={styles.footerLink} to={"/cadastrar"}>
-            Sign-up
+            Cadastre-se
           </Link>
         </p>
       </form>
