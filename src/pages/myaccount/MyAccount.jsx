@@ -57,6 +57,8 @@ function MyAccount() {
       };
 
       request(url, options);
+    } else {
+      navigate("/");
     }
   }, [updateTransactions]);
 
