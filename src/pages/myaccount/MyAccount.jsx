@@ -77,7 +77,7 @@ function MyAccount() {
 
       <h1>CONTROLE FINANCEIRO</h1>
 
-      <BalanceInfo data={data} updateTransactions={updateTransactions} />
+      <BalanceInfo data={data} />
 
       <button onClick={handleClick} className={styles.newTransactionBtn}>
         NOVA TRANSAÇÃO
