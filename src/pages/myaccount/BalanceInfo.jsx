@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./BalanceInfo.module.scss";
 
-function BalanceInfo({ data, updateTransactions }) {
+function BalanceInfo({ data }) {
   const [inputsValue, setInputsValue] = React.useState("");
   const [outputsValue, setOutputsValue] = React.useState("");
   const [balanceValue, setBalanceValue] = React.useState("");
 
   React.useEffect(() => {
-    if (data && data.length !== 0) {
+    if (data) {
       const inputs = data
         .filter((item) => {
           return item.type === "entrada";
@@ -53,7 +53,7 @@ function BalanceInfo({ data, updateTransactions }) {
       setOutputsValue(formattedOutputs);
       setBalanceValue(formattedBalance);
     }
-  }, [data, updateTransactions]);
+  }, [data]);
 
   return (
     <div className={styles.balanceInfo}>
