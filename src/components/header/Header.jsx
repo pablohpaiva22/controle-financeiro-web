@@ -48,7 +48,7 @@ function Header() {
             </Link>
           ) : (
             <Link to="/cadastrar" className={styles.link}>
-              Nova conta
+              Criar conta
             </Link>
           )}
         </nav>
