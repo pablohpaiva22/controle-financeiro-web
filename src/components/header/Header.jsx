@@ -23,7 +23,7 @@ function Header() {
         <div className={styles.logo}>
           <Link to="/">
             <img
-              src="../../src/assets/cifrao.png"
+              src={"../../src/assets/cifrao.png"}
               alt="logo imagem de um cifrao"
             />
           </Link>
