@@ -67,7 +67,7 @@ function MyAccount() {
       <div className={styles.dollarSignBg}>
         <div className={styles.dollarSign}>
           <img
-            src="../../src/assets/cifrao1.png"
+            src="/cifrao1.png"
             alt="imagem de um cifrao verde"
           />
         </div>
@@ -93,7 +93,7 @@ function MyAccount() {
         />
 
         <div className={styles.pigImage}>
-          <img src="../../src/assets/pig.png" alt="cofrinho de porquinho" />
+          <img src="/pig.png" alt="cofrinho de porquinho" />
         </div>
       </div>
 

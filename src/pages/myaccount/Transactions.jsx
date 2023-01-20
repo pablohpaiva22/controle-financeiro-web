@@ -90,7 +90,7 @@ function Transactions({ data, loading, setUpdateTransactions }) {
                 >
                   <img
                     id={item.id}
-                    src="../../src/assets/delete-icon.png"
+                    src="/delete-icon.png"
                     alt="delete icon"
                   />
                 </button>
@@ -98,7 +98,7 @@ function Transactions({ data, loading, setUpdateTransactions }) {
                 <button onClick={handleClick} className={styles.deleteIcon}>
                   <img
                     id={item.id}
-                    src="../../src/assets/delete-icon.png"
+                    src="/delete-icon.png"
                     alt="delete icon"
                   />
                 </button>
