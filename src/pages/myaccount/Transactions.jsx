@@ -1,8 +1,7 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import styles from "./Transactions.module.scss";
-import { GlobalContext } from "../../context/GlobalContext";
+import useLogout from '../../hooks/useLogout'
 
 function Transactions({ data, loading, setUpdateTransactions }) {
   const [transactionsArray, setTransactionsArray] = React.useState([]);
@@ -12,8 +11,7 @@ function Transactions({ data, loading, setUpdateTransactions }) {
     error,
     request,
   } = useFetch();
-  const navigate = useNavigate();
-  const { setLogin } = React.useContext(GlobalContext);
+  const { logout } = useLogout()
 
   React.useEffect(() => {
     if (data) {
@@ -49,11 +47,7 @@ function Transactions({ data, loading, setUpdateTransactions }) {
 
   React.useEffect(() => {
     if (error === "Falha na autentificação - Token inválido") {
-      navigate("/");
-
-      localStorage.clear();
-
-      setLogin(false);
+      logout()
     }
   }, [error]);
 
