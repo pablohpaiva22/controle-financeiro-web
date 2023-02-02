@@ -1,11 +1,11 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { GlobalContext } from "../../context/GlobalContext";
 import useFetch from "../../hooks/useFetch";
 import styles from "./MyAccount.module.scss";
 import Transactions from "./Transactions";
 import Modal from "./Modal";
 import BalanceInfo from "./BalanceInfo";
+import useLogout from "../../hooks/useLogout";
 
 function MyAccount() {
   const [username, setUsername] = React.useState("");
@@ -13,7 +13,7 @@ function MyAccount() {
   const [modal, setModal] = React.useState(false);
   const { pathname } = useLocation();
   const { data, error, loading, request } = useFetch();
-  const { setLogin } = React.useContext(GlobalContext);
+  const { logout } = useLogout()
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -22,11 +22,7 @@ function MyAccount() {
 
   React.useEffect(() => {
     if (error === "Falha na autentificação - Token inválido") {
-      navigate("/");
-
-      localStorage.clear();
-
-      setLogin(false);
+      logout()
     }
   }, [error]);
 
