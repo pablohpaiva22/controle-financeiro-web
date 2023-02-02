@@ -4,6 +4,7 @@ import useFetch from "../../hooks/useFetch";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/general/Input";
 import { GlobalContext } from "../../context/GlobalContext";
+import useLogout from '../../hooks/useLogout'
 
 function Login() {
   const [email, setEmail] = React.useState("");
@@ -65,9 +66,7 @@ function Login() {
     }
 
     if (loginError) {
-      navigate("/");
-      localStorage.clear();
-      setLogin(false);
+      useLogout()
     }
   }, [loginData, loginError]);
 
