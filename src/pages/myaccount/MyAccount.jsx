@@ -32,8 +32,9 @@ function MyAccount() {
 
   React.useEffect(() => {
     const user = localStorage.getItem("user");
+    const token = localStorage.getItem("token");
 
-    if (user) {
+    if (token && user) {
       const userObj = JSON.parse(user);
       const getId = Number(pathname.replace("/minhaconta/", " "));
 
@@ -42,13 +43,7 @@ function MyAccount() {
       } else {
         navigate("/");
       }
-    } else {
-      navigate("/");
-    }
 
-    const token = localStorage.getItem("token");
-
-    if (token) {
       const url = "https://new-project-server.vercel.app/gettransactions";
 
       const options = {
