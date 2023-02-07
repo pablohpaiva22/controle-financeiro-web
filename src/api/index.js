@@ -62,3 +62,29 @@ export const DELETE_TRANSACTION = (token, id) => {
     options,
   };
 };
+
+export const NEW_TRANSACTION = (
+  token,
+  description,
+  price,
+  type,
+  id_user,
+  date
+) => {
+  const url = "https://new-project-server.vercel.app/newtransaction";
+
+  const options = {
+    method: "POST",
+    headers: {
+      authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify({ description, price, type, id_user, date }),
+  };
+
+  return {
+    url,
+    options,
+  };
+};
