@@ -2,6 +2,7 @@ import React from "react";
 import styles from "./Modal.module.scss";
 import Input from "../../components/general/Input";
 import useFetch from "../../hooks/useFetch";
+import { NEW_TRANSACTION } from "../../api";
 
 function Modal({ setModal, setUpdateTransactions }) {
   const [description, setDescription] = React.useState("");
@@ -42,17 +43,7 @@ function Modal({ setModal, setUpdateTransactions }) {
       if (description.length && price.length && type.length !== 0) {
         setEmptyFieldError(false);
 
-        const url = "https://new-project-server.vercel.app/newtransaction";
-
-        const options = {
-          method: "POST",
-          headers: {
-            authorization: "Bearer " + token,
-            "Content-Type": "application/json",
-          },
-
-          body: JSON.stringify({ description, price, type, id_user, date }),
-        };
+        const { url, options } = NEW_TRANSACTION(token, description, price, type, id_user, date)
 
         request(url, options);
       } else {
