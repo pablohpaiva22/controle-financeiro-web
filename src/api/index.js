@@ -43,3 +43,22 @@ export const GET_TRANSACTIONS = (token) => {
     options,
   };
 };
+
+export const DELETE_TRANSACTION = (token, id) => {
+  const url = "https://new-project-server.vercel.app/deletetransaction";
+
+  const options = {
+    method: "DELETE",
+    headers: {
+      authorization: "Bearer " + token,
+      "Content-Type": "application/json",
+    },
+
+    body: JSON.stringify({ id }),
+  };
+
+  return {
+    url,
+    options,
+  };
+};
