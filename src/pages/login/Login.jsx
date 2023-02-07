@@ -4,7 +4,8 @@ import useFetch from "../../hooks/useFetch";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../../components/general/Input";
 import { GlobalContext } from "../../context/GlobalContext";
-import useLogout from '../../hooks/useLogout'
+import useLogout from "../../hooks/useLogout";
+import { SIGNIN, GET_USER } from "../../api/index";
 
 function Login() {
   const [email, setEmail] = React.useState("");
@@ -31,15 +32,9 @@ function Login() {
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    };
+    const { url, options } = SIGNIN(email, password);
 
-    request("https://new-project-server.vercel.app/login", options);
+    request(url, options);
   }
 
   React.useEffect(() => {
@@ -48,12 +43,7 @@ function Login() {
 
       setLogin(true);
 
-      const url = "https://new-project-server.vercel.app/getuser";
-
-      const options = {
-        method: "GET",
-        headers: { authorization: "Bearer " + data.token },
-      };
+      const { url, options } = GET_USER(data.token)
 
       loginRequest(url, options);
     }
@@ -66,7 +56,7 @@ function Login() {
     }
 
     if (loginError) {
-      useLogout()
+      useLogout();
     }
   }, [loginData, loginError]);
 
