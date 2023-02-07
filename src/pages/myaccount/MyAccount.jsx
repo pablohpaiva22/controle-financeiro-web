@@ -6,6 +6,7 @@ import Transactions from "./Transactions";
 import Modal from "./Modal";
 import BalanceInfo from "./BalanceInfo";
 import useLogout from "../../hooks/useLogout";
+import { GET_TRANSACTIONS } from "../../api/index";
 
 function MyAccount() {
   const [username, setUsername] = React.useState("");
@@ -13,7 +14,7 @@ function MyAccount() {
   const [modal, setModal] = React.useState(false);
   const { pathname } = useLocation();
   const { data, error, loading, request } = useFetch();
-  const { logout } = useLogout()
+  const { logout } = useLogout();
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -22,7 +23,7 @@ function MyAccount() {
 
   React.useEffect(() => {
     if (error === "Falha na autentificação - Token inválido") {
-      logout()
+      logout();
     }
   }, [error]);
 
@@ -40,12 +41,7 @@ function MyAccount() {
         navigate("/");
       }
 
-      const url = "https://new-project-server.vercel.app/gettransactions";
-
-      const options = {
-        method: "GET",
-        headers: { authorization: "Bearer " + token },
-      };
+      const { url, options } = GET_TRANSACTIONS(token)
 
       request(url, options);
     } else {
@@ -57,10 +53,7 @@ function MyAccount() {
     <section className={styles.container}>
       <div className={styles.dollarSignBg}>
         <div className={styles.dollarSign}>
-          <img
-            src="/cifrao1.png"
-            alt="imagem de um cifrao verde"
-          />
+          <img src="/cifrao1.png" alt="imagem de um cifrao verde" />
         </div>
       </div>
 
