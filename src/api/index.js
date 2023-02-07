@@ -88,3 +88,25 @@ export const NEW_TRANSACTION = (
     options,
   };
 };
+
+export const NEW_USER = (user, email, password, passCheck) => {
+  const url = "https://new-project-server.vercel.app/newuser";
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      user,
+      email,
+      password,
+      passCheck,
+    }),
+  };
+
+  return {
+    url,
+    options,
+  };
+};
