@@ -2,6 +2,7 @@ import React from "react";
 import useFetch from "../../hooks/useFetch";
 import styles from "./Transactions.module.scss";
 import useLogout from '../../hooks/useLogout'
+import { DELETE_TRANSACTION } from "../../api";
 
 function Transactions({ data, loading, setUpdateTransactions }) {
   const [transactionsArray, setTransactionsArray] = React.useState([]);
@@ -29,17 +30,7 @@ function Transactions({ data, loading, setUpdateTransactions }) {
     const token = localStorage.getItem("token");
 
     if (token) {
-      const url = "https://new-project-server.vercel.app/deletetransaction";
-
-      const options = {
-        method: "DELETE",
-        headers: {
-          authorization: "Bearer " + token,
-          "Content-Type": "application/json",
-        },
-
-        body: JSON.stringify({ id: event.target.id }),
-      };
+      const { url, options } = DELETE_TRANSACTION(token, event.target.id)
 
       request(url, options);
     }
