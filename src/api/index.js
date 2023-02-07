@@ -12,8 +12,8 @@ export const SIGNIN = (email, password) => {
 
   return {
     url,
-    options
-  }
+    options,
+  };
 };
 
 export const GET_USER = (token) => {
@@ -26,6 +26,20 @@ export const GET_USER = (token) => {
 
   return {
     url,
-    options
-  }
-}
+    options,
+  };
+};
+
+export const GET_TRANSACTIONS = (token) => {
+  const url = "https://new-project-server.vercel.app/gettransactions";
+
+  const options = {
+    method: "GET",
+    headers: { authorization: "Bearer " + token },
+  };
+
+  return {
+    url,
+    options,
+  };
+};
