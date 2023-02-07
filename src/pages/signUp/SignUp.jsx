@@ -4,6 +4,7 @@ import useFetch from "../../hooks/useFetch";
 import Input from "../../components/general/Input";
 import { Link, useNavigate } from "react-router-dom";
 import { GlobalContext } from "../../context/GlobalContext";
+import { NEW_USER, SIGNIN, GET_USER } from "../../api";
 
 function SignUp() {
   const [user, setUser] = React.useState("");
@@ -29,35 +30,16 @@ function SignUp() {
   function handleSubmit(event) {
     event.preventDefault();
 
-    const options = {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        user,
-        email,
-        password,
-        passCheck,
-      }),
-    };
-
-    const url = "https://new-project-server.vercel.app/newuser";
+    const { url, options } = NEW_USER(user, email, password, passCheck);
 
     request(url, options);
   }
 
   React.useEffect(() => {
     if (data) {
-      const options = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      };
+      const { url, options } = SIGNIN(email, password)
 
-      loginRequest("https://new-project-server.vercel.app/login", options);
+      loginRequest(url, options);
     }
   }, [data]);
 
@@ -67,12 +49,7 @@ function SignUp() {
 
       setLogin(true);
 
-      const url = "https://new-project-server.vercel.app/getuser";
-
-      const options = {
-        method: "GET",
-        headers: { authorization: "Bearer " + loginData.token },
-      };
+      const { url, options } = GET_USER(loginData.token)
 
       userRequest(url, options);
     }
